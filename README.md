@@ -1,6 +1,8 @@
 # BlindTestMaker
 Cooperated blind test maker that allows multiple users to create a unique deezer playlist by adding their songs
 
+Deployement url : https://blindtestmaker.pages.dev/
+
 ## Fonctionnalités
 * Le mj se rend sur l'url et crée une nouvelle session. Cela demande de se connecter à Deezer. Puis un code qr ou une url est générée pour que les autres puissent ajouter leurs chansons.
 * les autres joueurs se connectent via l'url qui contient les données du web socket permettant de transmettre les chansons au mj
