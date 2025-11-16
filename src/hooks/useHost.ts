@@ -3,7 +3,7 @@ import { WORKER_URL, WEBSOCKET_URL } from "@/config";
 
 export function useHost() {
   const [roomId, setRoomId] = useState<string | null>(null);
-  const [titlesList, setTitlesList] = useState<Object[]>([]);
+  const [trackList, setTrackList] = useState<string[]>([]);
   const [hostConnected, setHostConnected] = useState<boolean>(false);
   const wsRef = useRef<WebSocket | null>(null);
 
@@ -23,8 +23,8 @@ export function useHost() {
 
     ws.onmessage = (event) => {
       console.log("New title added:", event.data);
-      const title = JSON.parse(event.data);
-      addTitle(title);
+      const songId = JSON.parse(event.data).songId;
+      addTrack(songId);
     };
 
     ws.onerror = (error) => {
@@ -32,13 +32,13 @@ export function useHost() {
     };
 
     ws.onclose = () => {
-      console.warn("WebSocket connection closed.");
+      console.error("WebSocket connection closed.");
       setHostConnected(false);
     };
   }, []);
 
-  const addTitle = useCallback((title: Object) => {
-    setTitlesList((prevTitles) => [...prevTitles, title]);
+  const addTrack = useCallback((track: string) => {
+    setTrackList((prevTracks) => [...prevTracks, track]);
   }, []);
 
   // Cleanup WebSocket on unmount
@@ -50,10 +50,12 @@ export function useHost() {
     };
   }, []);
 
+  // TODO : authentication to Spotify and playlist creation
+
   return {
     roomId,
     wsRef,
-    titlesList,
+    trackList,
     hostConnected,
 
     createRoom,
