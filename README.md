@@ -33,3 +33,15 @@ Si vous souhaitez reconstruire pour la production:
 npm run build
 npm run preview
 ```
+
+## Cloudflare Worker
+
+Le projet utilise un Cloudflare Worker pour la fonctionnalité WebSocket. L'URL du Worker déployé est:
+
+`https://websocket-worker.loumarv.workers.dev/`
+
+Importez cette valeur depuis `src/config.ts` dans votre code pour l'utiliser partout:
+
+```ts
+import { WORKER_URL } from './src/config'
+```
