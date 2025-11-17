@@ -17,7 +17,7 @@ export function usePlayer(roomId: string) {
     setSearchResults(data);
   }, [setSearchResults]);
 
-  const sendSelectedSong = useCallback(async () => {
+  const sendSelectedSongs = useCallback(async () => {
     selectedSongs.forEach(async (song) => {
       const songId = song.id;
       const addSongResponse = await fetch(`${WORKER_URL}/rooms/${roomId}/add-song/`, {
@@ -48,6 +48,6 @@ export function usePlayer(roomId: string) {
     searchResults,
     selectedSongs,
     searchSpotify,
-    sendSelectedSong,
+    sendSelectedSongs,
   };
 }
